@@ -1,7 +1,5 @@
 package boardgame;
 
-import java.nio.channels.NonWritableChannelException;
-
 public class Board {
 
     private int rows;

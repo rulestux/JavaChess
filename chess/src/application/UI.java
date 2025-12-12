@@ -30,6 +30,13 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+	// método para limpar a tela com código extraído de:
+    // https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
     // método para ler a posição informada pelo jogador:
     public static ChessPosition readChessPosition(Scanner sc) {
         try {
@@ -39,13 +46,19 @@ public class UI {
             return new ChessPosition(column, row);
         }
         catch (RuntimeException e) {
-            throw new InputMismatchException("Error reating Chess Position. Valid values are from a1 to h8.");
+            throw new InputMismatchException("Error reading position. Valid values are from a1 to h8.");
         }
     }
 
     public static void printBoard(ChessPiece[][] pieces) {
+        // espaço acima do tabuleiro:
+        System.out.println();
+
         for (int i=0; i < pieces.length; i++) {
-            System.out.print((8 - i) + " ");
+            // numeração das linhas com espaço antes, para afastar da margem
+            // do terminal:
+            System.out.print(" " + (8 - i) + " ");
+            // peças ou casas nas linhas:
             for (int j=0; j < pieces[i].length; j++) {
                 printPiece(pieces[i][j]);
             }
@@ -54,6 +67,8 @@ public class UI {
         }
         System.out.println("  a b c d e f g h");
 
+        // espaço abaixo do tabuleiro:
+        System.out.println();
     }
     private static void printPiece(ChessPiece piece) {
         if (piece == null) {
