@@ -60,7 +60,7 @@ public class UI {
             System.out.print(" " + (8 - i) + " ");
             // peças ou casas nas linhas:
             for (int j=0; j < pieces[i].length; j++) {
-                printPiece(pieces[i][j]);
+                printPiece(pieces[i][j], false);
             }
             // quebra para próxima linha:
             System.out.println();
@@ -70,7 +70,33 @@ public class UI {
         // espaço abaixo do tabuleiro:
         System.out.println();
     }
-    private static void printPiece(ChessPiece piece) {
+
+    // destaque dos movimentos possíveis no tabuleiro:
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+        // espaço acima do tabuleiro:
+        System.out.println();
+
+        for (int i=0; i < pieces.length; i++) {
+            // numeração das linhas com espaço antes, para afastar da margem
+            // do terminal:
+            System.out.print(" " + (8 - i) + " ");
+            // peças ou casas nas linhas:
+            for (int j=0; j < pieces[i].length; j++) {
+                printPiece(pieces[i][j], possibleMoves[i][j]);
+            }
+            // quebra para próxima linha:
+            System.out.println();
+        }
+        System.out.println("   a b c d e f g h");
+
+        // espaço abaixo do tabuleiro:
+        System.out.println();
+    }
+
+    private static void printPiece(ChessPiece piece, boolean background) {
+        if (background) {
+            System.out.print(ANSI_BLUE_BACKGROUND);
+        }
         if (piece == null) {
             System.out.print(ANSI_YELLOW + "■" + ANSI_RESET);
         }
