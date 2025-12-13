@@ -42,9 +42,15 @@ public class ChessMatch {
         return capturedPiece;
     }
 
+    // validação da peça de origem:
     private void validateSourcePosition(Position position) {
+        // se existe peça na posição (casa) escolhida:
         if (!board.thereIsAPiece(position)) {
             throw new ChessException("There is no piece on source position.");
+        }
+        // se a peça pode ser movida ou está travada:
+        if (!board.piece(position).isThereAnyPossibleMove()) {
+            throw new ChessException("There is no possible moves for the chosen piece.");
         }
     }
 

@@ -65,7 +65,7 @@ public class UI {
             // quebra para próxima linha:
             System.out.println();
         }
-        System.out.println("  a b c d e f g h");
+        System.out.println("   a b c d e f g h");
 
         // espaço abaixo do tabuleiro:
         System.out.println();
