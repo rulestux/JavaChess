@@ -1,7 +1,10 @@
 package application;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -55,11 +58,15 @@ public class UI {
         }
     }
 
-    // impressão da jogada e da cor do jogador corrente:
-    public static void printMatch(ChessMatch chessMatch) {
-        System.out.println("Turn: " + chessMatch.getTurn());
-        System.out.print("Current player: ");
-        // background da cor do jogador:
+    // impressão da jogada, da cor do jogador corrente e de peças capturadas:
+    public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
+        // peças capturadas:
+        printCapturedPieces(captured);
+        System.out.println();
+
+        System.out.println(ANSI_BOLD + ANSI_CYAN_BACKGROUND + ANSI_WHITE + "     TURN: " + chessMatch.getTurn() + "       " + ANSI_RESET);
+        System.out.print("Player: ");
+        // cor do jogador corrente:
         if (chessMatch.getCurrentPlayer() == Color.WHITE) {
             System.out.print(ANSI_BLINK + ANSI_WHITE + "🩒 " + ANSI_BOLD + "WHITE" + ANSI_RESET);
         }
@@ -71,6 +78,8 @@ public class UI {
 
     // impressão do tabuleiro na tela:
     public static void printBoard(ChessPiece[][] pieces) {
+        // barra de título:
+        System.out.println(ANSI_BOLD + ANSI_BLUE_BACKGROUND + ANSI_WHITE + "    JAVA CHESS     " + ANSI_RESET);
         // espaço acima do tabuleiro:
         System.out.println();
 
@@ -91,8 +100,11 @@ public class UI {
         System.out.println();
     }
 
-    // destaque dos movimentos possíveis no tabuleiro, para uma peça escolhida:
+    // impressão do tabuleiro com destaque dos movimentos possíveis para
+    // uma peça escolhida:
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+        // barra de título:
+        System.out.println(ANSI_BOLD + ANSI_BLUE_BACKGROUND + ANSI_WHITE + "    JAVA CHESS     " + ANSI_RESET);
         // espaço acima do tabuleiro:
         System.out.println();
 
@@ -130,5 +142,17 @@ public class UI {
             }
         }
         System.out.print(" ");
+    }
+
+    // impressão das peças capturadas:
+    private static void printCapturedPieces(List<ChessPiece> captured) {
+        // expressão lambda para filtrar da lista todos os elementos com o
+        // predicado Color.WHITE ou Color.BLACK:
+        List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+        List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
+        // imprimindo listas:
+        System.out.println(ANSI_BOLD + ANSI_WHITE + ANSI_RED_BACKGROUND + "     CAPTURED      " + ANSI_RESET);
+        System.out.println(ANSI_WHITE + Arrays.toString(white.toArray()) + ANSI_RESET);
+        System.out.println(ANSI_CYAN + Arrays.toString(black.toArray()) + ANSI_RESET);
     }
 }
