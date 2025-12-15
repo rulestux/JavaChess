@@ -64,19 +64,38 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
 
+        // barra de jogada (turno):
         System.out.println(ANSI_BOLD + ANSI_CYAN_BACKGROUND + ANSI_WHITE + "     TURN: " + chessMatch.getTurn() + "       " + ANSI_RESET);
-        System.out.print("Player: ");
-        // cor do jogador corrente:
-        if (chessMatch.getCurrentPlayer() == Color.WHITE) {
-            System.out.print(ANSI_BLINK + ANSI_WHITE + "🩒 " + ANSI_BOLD + "WHITE" + ANSI_RESET);
+
+        // testar se não há cheque-mate para seguir com a próxima jogada:
+        if (!chessMatch.getCheckMate()) {
+
+            // jogador corrente:
+            System.out.print("Player: ");
+            // cor do jogador corrente:
+            if (chessMatch.getCurrentPlayer() == Color.WHITE) {
+                System.out.print(ANSI_BLINK + ANSI_WHITE + "🩒 " + ANSI_BOLD + "WHITE" + ANSI_RESET);
+            }
+            else {
+                System.out.print(ANSI_BLINK + ANSI_CYAN + "🩒 " + ANSI_BOLD + "BLACK" + ANSI_RESET);
+            }
+            System.out.println();
+
+            // notificação de cheque:
+            if (chessMatch.getCheck()) {
+                System.out.println(ANSI_BOLD + ANSI_BLINK + ANSI_YELLOW + "  󰀦  C H E C K 󰀦 " + ANSI_RESET);
+            }
+
         }
+        // fim de jogo e cheque-mate:
         else {
-            System.out.print(ANSI_BLINK + ANSI_CYAN + "🩒 " + ANSI_BOLD + "BLACK" + ANSI_RESET);
-        }
-        System.out.println();
-        // notificação de cheque:
-        if (chessMatch.getCheck()) {
-            System.out.println(ANSI_BOLD + ANSI_BLINK + ANSI_RED + "  󰀦  C H E C K 󰀦 " + ANSI_RESET);
+            System.out.println();
+            System.out.println(ANSI_BOLD + ANSI_RED_BACKGROUND + ANSI_WHITE + "·                 ·" + ANSI_RESET);
+            System.out.println(ANSI_BOLD + ANSI_RED_BACKGROUND + ANSI_WHITE + "    CHECKMATE!     " + ANSI_RESET);
+            System.out.println(ANSI_BOLD + ANSI_RED_BACKGROUND + ANSI_WHITE + "·                 ·" + ANSI_RESET);
+            System.out.println();
+            System.out.println(ANSI_BOLD + ANSI_BLINK + ANSI_RED + "    " + chessMatch.getCurrentPlayer().toString().toUpperCase() + " WON!" + ANSI_RESET);
+            System.out.println();
         }
     }
 
