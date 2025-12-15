@@ -74,6 +74,10 @@ public class UI {
             System.out.print(ANSI_BLINK + ANSI_CYAN + "🩒 " + ANSI_BOLD + "BLACK" + ANSI_RESET);
         }
         System.out.println();
+        // notificação de cheque:
+        if (chessMatch.getCheck()) {
+            System.out.println(ANSI_BOLD + ANSI_BLINK + ANSI_RED + "  󰀦  C H E C K 󰀦 " + ANSI_RESET);
+        }
     }
 
     // impressão do tabuleiro na tela:

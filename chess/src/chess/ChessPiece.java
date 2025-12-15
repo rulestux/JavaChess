@@ -17,6 +17,12 @@ public abstract class ChessPiece extends Piece {
         return color;
     }
 
+    // método que chama o conversor de posições na matriz para posições no
+    // tabuleiro:
+    public ChessPosition getChessPosition() {
+        return ChessPosition.fromPosition(position);
+    }
+
     protected boolean isThereOpponentPiece(Position position) {
         ChessPiece p = (ChessPiece)getBoard().piece(position);
         return p != null && p.getColor() != color;
