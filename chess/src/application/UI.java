@@ -74,10 +74,10 @@ public class UI {
             System.out.print("Player: ");
             // cor do jogador corrente:
             if (chessMatch.getCurrentPlayer() == Color.WHITE) {
-                System.out.print(ANSI_BLINK + ANSI_WHITE + "🩒 " + ANSI_BOLD + "WHITE" + ANSI_RESET);
+                System.out.print(ANSI_BLINK + ANSI_WHITE + "🨅 " + ANSI_BOLD + "WHITE" + ANSI_RESET);
             }
             else {
-                System.out.print(ANSI_BLINK + ANSI_CYAN + "🩒 " + ANSI_BOLD + "BLACK" + ANSI_RESET);
+                System.out.print(ANSI_BLINK + ANSI_CYAN + "🨅 " + ANSI_BOLD + "BLACK" + ANSI_RESET);
             }
             System.out.println();
 

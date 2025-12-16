@@ -22,6 +22,7 @@ public class ChessMatch {
     private boolean check;
     private boolean checkMate;
     private ChessPiece enPassantVulnerable;
+    private ChessPiece promoted;
 
     private List<Piece> piecesOnTheBoard = new ArrayList<>();
     private List<Piece> capturedPieces = new ArrayList<>();
@@ -51,6 +52,10 @@ public class ChessMatch {
 
     public ChessPiece getEnPassantVulnerable() {
         return enPassantVulnerable;
+    }
+
+    public ChessPiece getPromoted() {
+        return promoted;
     }
 
     public ChessPiece[][] getPieces() {
@@ -90,6 +95,17 @@ public class ChessMatch {
         // instância de peça movida para teste En-Passant abaixo:
         ChessPiece movedPiece = (ChessPiece)board.piece(target);
 
+        // PROMOTION
+        promoted = null;
+        if (movedPiece instanceof Pawn) {
+            // validar equipe do peão e se ele chegou no limite oposto do
+            // tabuleiro:
+            if ((movedPiece.getColor() == Color.WHITE && target.getRow() == 0) || (movedPiece.getColor() == Color.BLACK && target.getRow() == 7)) {
+                promoted = (ChessPiece)board.piece(target);
+                promoted = replacePromotedPiece("Q");
+            }
+        }
+
         // ternário para verificar se o oponente foi colocado em cheque:
         check = (testCheck(opponent(currentPlayer))) ? true : false;
 
@@ -112,6 +128,32 @@ public class ChessMatch {
         }
 
         return (ChessPiece)capturedPiece;
+    }
+
+    // PROMOTION método de escolha da peça e troca:
+    public ChessPiece replacePromotedPiece(String type) {
+        if (promoted == null) {
+            throw new IllegalStateException("There is no piece to be promoted.");
+        }
+        if (!type.equals("B") && !type.equals("K") && !type.equals("Q") && !type.equals("R")) {
+            return promoted;
+        }
+        Position pos = promoted.getChessPosition().toPosition();
+        Piece p = board.removePiece(pos);
+        piecesOnTheBoard.remove(p);
+
+        ChessPiece newPiece = newPiece(type, promoted.getColor());
+        board.placePiece(newPiece, pos);
+        piecesOnTheBoard.add(newPiece);
+
+        return newPiece;
+    }
+
+    private ChessPiece newPiece(String type, Color color) {
+        if (type.equals("B")) return new Bishop(board, color);
+        if (type.equals("K")) return new Knight(board, color);
+        if (type.equals("Q")) return new Queen(board, color);
+        return new Rook(board, color);
     }
 
 /*===========================================================================*/
