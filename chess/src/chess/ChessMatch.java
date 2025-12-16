@@ -95,9 +95,14 @@ public class ChessMatch {
     // movimento das peças de uma origem para um destino, incluindo substituição
     // de peças capturadas nas casas:
     private Piece makeMove(Position source, Position target) {
-        Piece p = board.removePiece(source);
+        ChessPiece p = (ChessPiece)board.removePiece(source);
+        p.increaseMoveCount();
+
         // peça capturada:
         Piece capturedPiece = board.removePiece(target);
+
+        // conclusão do movimento:
+        board.placePiece(p, target);
 
         // caso haja uma captura, atualizar lista de peças no tabuleiro
         // e de peças capturadas:
@@ -106,13 +111,15 @@ public class ChessMatch {
             capturedPieces.add(capturedPiece);
         }
 
-        board.placePiece(p, target);
         return capturedPiece;
     }
 
     // desfazer movimento, caso o movimento solicitado resulte em cheque:
     private void undoMove(Position source, Position target, Piece capturedPiece) {
-        Piece p = board.removePiece(target);
+        ChessPiece p = (ChessPiece)board.removePiece(target);
+        p.decreaseMoveCount();
+
+        // conclusão:
         board.placePiece(p, source);
 
         // testar se alguma peça foi capturada e reintegrá-la:
