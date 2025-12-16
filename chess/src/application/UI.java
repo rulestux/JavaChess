@@ -102,7 +102,7 @@ public class UI {
     // impressão do tabuleiro na tela:
     public static void printBoard(ChessPiece[][] pieces) {
         // barra de título:
-        System.out.println(ANSI_BOLD + ANSI_BLUE_BACKGROUND + ANSI_WHITE + "    JAVA CHESS     " + ANSI_RESET);
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND + ANSI_WHITE + "    JAVA CHESS     " + ANSI_RESET);
         // espaço acima do tabuleiro:
         System.out.println();
 
@@ -127,7 +127,7 @@ public class UI {
     // uma peça escolhida:
     public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
         // barra de título:
-        System.out.println(ANSI_BOLD + ANSI_BLUE_BACKGROUND + ANSI_WHITE + "    JAVA CHESS     " + ANSI_RESET);
+        System.out.println(ANSI_BOLD + ANSI_YELLOW_BACKGROUND + ANSI_WHITE + "    JAVA CHESS     " + ANSI_RESET);
         // espaço acima do tabuleiro:
         System.out.println();
 
@@ -174,7 +174,7 @@ public class UI {
         List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
         List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
         // imprimindo listas:
-        System.out.println(ANSI_BOLD + ANSI_WHITE + ANSI_RED_BACKGROUND + "     CAPTURED      " + ANSI_RESET);
+        System.out.println(ANSI_BOLD + ANSI_WHITE + ANSI_BLUE_BACKGROUND + "     CAPTURED      " + ANSI_RESET);
         System.out.println(ANSI_WHITE + Arrays.toString(white.toArray()) + ANSI_RESET);
         System.out.println(ANSI_CYAN + Arrays.toString(black.toArray()) + ANSI_RESET);
     }
