@@ -13,25 +13,11 @@ The project follows a **layered design inspired by MVC principles**:
 
 The domain layer is fully decoupled from the presentation layer, allowing the game logic to remain independent from the UI implementation.
 
-## ✨ Features
-
-* Fully playable **chess game in the terminal**
-* Clear separation between **domain logic and UI**
-* **ANSI-colored CLI interface** for better readability
-* Visual indication of:
-
-  * current turn and active player
-  * check and checkmate states
-  * possible moves for selected pieces
-* Dynamic listing of **captured pieces**
-* Clean, modular code focused on **low coupling and high cohesion**
-
 ## 🛠️ Technologies & Tools
 
 * **Java**
 * Object-Oriented Programming (OOP)
 * MVC-inspired layered architecture
-* ANSI escape codes for terminal UI
 
 ### ✍️ Development Environment
 
@@ -55,7 +41,6 @@ This project helped consolidate practical knowledge of:
 
 ## 🚀 Next Steps (Ideas)
 
-* Add full chess rules (castling, en passant, promotion)
 * Refactor UI to support different frontends
 * Create automated tests for domain logic
 
