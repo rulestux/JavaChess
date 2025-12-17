@@ -41,7 +41,7 @@ All source files were written **entirely using terminal-based editors**:
 * **Neovim**
 * **coc.nvim** with **coc-java** for Java language support (LSP, autocompletion, diagnostics)
 
-No IDEs were used during development — the project was built using a **CLI-first workflow**, reinforcing familiarity with terminal tooling and editor-driven development.
+No IDEs were used during development — the project was built using a **CLI-first workflow**.
 
 ## 🎯 Learning Outcomes
 
